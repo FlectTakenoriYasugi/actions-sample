@@ -7,12 +7,18 @@ jobs:
   hello:
     runs-on: ubuntu-latest
     environment: ${{ github.ref_name == 'main' && 'PRODUCTION' || github.ref_name == 'staging' && 'STAGING' || 'SANDBOX'}}
+    env:
+        # echoで表示したいので別変数として定義
+        ENV_NAME: ${{ github.ref_name == 'main' && 'PRODUCTION' || github.ref_name == 'staging' && 'STAGING' || 'SANDBOX'}}
+        MY_SECRET: ${{ secrets.MY_SECRET}}
+        ENV_SECRET: ${{ secrets.ENV_SECRET}}
+
     steps:
       - name: Echo hello world
         run: echo "hello world"
       - name: Echo environment
-        run: echo "environment = ${{ job.environment }}"
+        run: echo "environment = ${{ env.ENV_NAME}}"
       - name: Echo secret
-        run: echo "${{ secrets.MY_SECRET }}"
+        run: echo "MY_SECRET = ${{ env.MY_SECRET }}"
       - name: Echo Env Secret
-        run: echo "${{ secrets.ENV_SECRET }}"
+        run: echo "ENV_SECRET = ${{ env.ENV_SECRET }}"
