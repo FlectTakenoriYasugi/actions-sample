@@ -11,7 +11,7 @@ jobs:
       - name: Echo hello world
         run: echo "hello world"
       - name: Echo environment
-        run: echo "${{ job.environment }}"
+        run: echo "environment = ${{ job.environment }}"
       - name: Echo secret
         run: echo "${{ secrets.MY_SECRET }}"
       - name: Echo Env Secret
