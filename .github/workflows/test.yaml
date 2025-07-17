@@ -10,6 +10,8 @@ jobs:
     steps:
       - name: Echo hello world
         run: echo "hello world"
+      - name: Echo environment
+        run: echo "${{ github.environment }}"
       - name: Echo secret
         run: echo "${{ secrets.MY_SECRET }}"
       - name: Echo Env Secret
